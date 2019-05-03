@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[(function() {
+	//"use strict";
+
+	//Add a coment
+	var dataApp = angular.module("dataAPIApp", []);
+	dataApp.factory("dataAPIFactory", dataAPIFactory);
+	dataApp.controller("dataAPIController", dataAPIController);
+// 	dataApp.value("modelPopoverInfoCampaigns",{popoverInfoCampaigns:[]});
+// 	dataApp.value("modelListOfEmailTemplates",{listOfEmailTemplates:[]});	
+// 	dataApp.value("modelListOfSendingProfiles",{listOfSendingProfiles:[]});
+// 	dataApp.value("modelListOfLandingPages", {listOfLandingPages:[]});
+// 	dataApp.value("modelListOfCampaigns",{listOfCampaigns:[]});
+// 	dataApp.value("modelListOfUsers",{listOfUsers:[]});
+// 	dataApp.value("modelListOfGroups",{listOfGroups:[]});
+
+	function dataAPIController($scope, dataAPIFactory) {
+		
+		$scope.createCampaign = function() {
+			dataAPIFactory.createCampaign($scope);
+			console.log($scope);
+		};
+
+	}
+
+	function dataAPIFactory(){
+		return {
+			
+			createCampaign: function(ctrl) {
+				console.log(">>createCampaign()");
+				console.log(ctrl, ctrl.campaignName);
+
+// 				if(ctrl.campaignName) {
+// 					var that = this;
+
+// 					var ga = new GlideAjax('x_whit3_phish_f.PhishData');
+
+// 					ga.addParam('sysparm_name', 'createNewCampaign');
+// 					ga.addParam('sysparm_campaign_name', ctrl.campaignName);
+// 					ga.addParam('sysparm_email_template', ctrl.selectedEmailTemplate);
+// 					ga.addParam('sysparm_landing_page', ctrl.selectedLandingPage);
+// 					ga.addParam('sysparm_sending_profile', ctrl.selectedSendingProfile);
+// 					ga.addParam('sysparm_group', ctrl.selectedGroup);
+// 					ga.getXML(createCampaignParse);
+
+// 					function createCampaignParse() {
+// 						var funcName = 'getCompaigns';
+// 						that._generateArrayOfRecords(ctrl, funcName);
+// 						jQuery("#compaignModal").modal("hide");
+// 					}
+// 				}
+			}	
+			
+		};	
+	}
+})();]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_58872_needit_test.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+	<style>
+		.whcf_main {
+		background-color: #3e444d;
+		display: table;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		margin: 0;
+		}
+		.whcf_modal-inputs {
+		margin-bottom:10px;
+		}
+		textarea { 
+		resize: vertical; 
+		}
+		.whcf_main-table td:hover {
+		cursor:pointer;
+		}
+		.whcf_main-table th {
+		cursor:pointer;
+		}
+		.modal-required_fields {
+		font-size: 6px;
+		vertical-align: super;
+		color: #fb6161;
+		}
+		.sortorder:after {
+		content: '\25b2'; 
+		padding: 0 5px;
+		}
+		.sortorder.reverse:after {
+		content: '\25bc'; 
+		}
+		.btn-close-icon {
+		color: #ffffff !important;
+		font-size: 15px;
+		padding: 0 15px;
+		}
+		.popover {
+		position: absolute;
+		display: block;
+		z-index: 100;
+		top: 25px;
+		background-color: #222425e8;
+		border: none;
+		padding: 15px;
+		width: 180px;
+		}
+		ul  {
+		list-style: none;
+		padding:0;
+		}
+		.board_box{
+		display:inline-block;
+		margin:auto;
+		margin: 15px 30px;
+		}
+		.board_box p{
+		color:#fff;
+		}
+	</style>
+	<body>
+		<div class="whcf_main">
+			<div class="container ng-cloak" ng-app="dataAPIApp" ng-controller="dataAPIController">
+				<div class="row">
+					<div class="col-md-2">
+						<a href="#" class="whcf_main-link whcf_main-link-email" ng-click="getListOfData('email')">
+							<div class="whcf_main-link-box">
+								<i class="fas fa-mail-bulk"></i>
+								<p>Email Template</p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-2">
+						<a href="#" class="whcf_main-link whcf_main-link-profile" ng-click="getListOfData('profile')">
+							<div class="whcf_main-link-box">
+								<i class="fas fa-envelope-open-text"></i>
+								<p>Sending Profile</p>
+							</div>
+
+						</a>
+					</div>
+					<div class="col-md-2">
+						<a href="#" class="whcf_main-link whcf_main-link-page" ng-click="getListOfData('page')">
+							<div class="whcf_main-link-box">
+								<i class="far fa-newspaper"></i>
+								<p>Landing Page</p>
+							</div>
+
+						</a>
+					</div>
+					<div class="col-md-2">
+						<a href="#" class="whcf_main-link whcf_main-link-compaing" ng-click="getListOfData('compaing')">
+							<div class="whcf_main-link-box">
+								<i class="fas fa-tasks"></i>
+								<p>Campaigns</p>
+							</div>
+
+						</a>
+					</div>
+					<div class="col-md-2">
+						<a href="#" class="whcf_main-link whcf_main-link-user" ng-click="getListOfData('group')">
+							<div class="whcf_main-link-box">
+								<i class="fas fa-users"></i>
+								<p>Groups</p>
+							</div>
+
+						</a>
+					</div>
+					<div class="col-md-2">
+						<a href="#" class="whcf_main-link whcf_main-link-board" ng-click="getListOfData('board')">
+							<div class="whcf_main-link-box">
+								<i class="fas fa-chart-line"></i>
+								<p>Dashboard</p>
+							</div>
+
+						</a>
+					</div>
+				</div>
+
+				<table class="table whcf_main-table">
+					<thead>
+						<tr ng-class="{email : colorElm == 'email', profile : colorElm == 'profile', page : colorElm == 'page', compaing : colorElm == 'compaing', user : colorElm == 'user', board : colorElm == 'board'}">
+
+
+							<!-- 				for compaign category			 -->
+
+							<th ng-click="sortBy('compaing_name')" >Campaign Name <span class="sortorder" ng-show="propertyName === 'compaing_name'" ng-class="{reverse: reverse}"></span></th>
+							<th ng-click="sortBy('compaing_date')" >Created Date <span class="sortorder" ng-show="propertyName === 'compaing_date'" ng-class="{reverse: reverse}"></span></th>
+							<th ng-click="sortBy('compaing_status')">Status <span class="sortorder" ng-show="propertyName === 'compaing_status'" ng-class="{reverse: reverse}"></span></th>
+							<th class = "text-right">
+								<a href="#" class="whcf_add_record" data-toggle="modal" data-target="#compaignModal" ng-click="createRecord(); ">
+<!-- 						getListOfData('email'); getListOfData('profile'); getListOfData('page'); getListOfData('group'); getListOfData('compaing')			 -->
+									<i class="fas fa-plus"></i>
+								</a>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr ng-repeat="campaigns in listOfCampaigns | orderBy:propertyName:reverse" ng-click="clickOnRow(campaigns)" ng-if=" colorElm == 'compaing'">
+							<td ng-bind="campaigns.name" data-toggle="modal" data-target="#compaignModal" ></td>
+							<td ng-bind="campaigns.created_date" data-toggle="modal" data-target="#compaignModal" ></td>
+							<td data-toggle="modal" data-target="#compaignModal" ng-mouseover="showPopover($index)" ng-mouseleave="hidePopover()">
+								<div style="position:relative;">
+									{{campaigns.status}}
+									<div class="popover" ng-if="popoverIsVisible &amp;&amp; row == $index">
+										<ul class="text-center">
+											<li>Launch Date: {{popoverInfoCampaigns.launch_date}}</li>
+											<li>Recipients: {{popoverInfoCampaigns.stats.total}}</li>
+											<li>Email opened: {{popoverInfoCampaigns.stats.opened}}</li>
+											<li>Email clicked: {{popoverInfoCampaigns.stats.clicked}}</li>
+											<li>Submitted Credentials: {{popoverInfoCampaigns.stats.submitted_data}}</li>
+											<li>Errors: {{popoverInfoCampaigns.stats.error}}</li>
+											<li>Reports: {{popoverInfoCampaigns.stats.email_reported}}</li>
+										</ul>
+									</div>
+								</div>
+							</td>			
+
+							<td class="text-right"><a href="#" class="btn-close-icon" ng-click="deleteEmail(campaigns.id)" ><i class="far fa-trash-alt"></i></a></td>
+
+						</tr>
+					</tbody>
+				</table>
+
+				
+
+				<!-- Modal window to create new CAMPAIGN -->
+
+				<form>
+					<div class="modal fade" id="compaignModal" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Create new Campaign</h4>
+	
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<label class="control-label col-sm-3 text-left" for="campaignName">Name: <i class="fas fa-star-of-life modal-required_fields"></i></label>
+										<div class="col-sm-9 whcf_modal-inputs">
+											<input type="text" class="form-control" id="campaignName" mandatory="true" ng-model='campaignNameValue' placeholder="Enter Campaign Name"  required="required"/>
+											{{campaignNameValue}}
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-3 text-left" for="template">Email Template:</label>
+										<div class="col-sm-9 whcf_modal-inputs">	
+											<select class="form-control" id="template" ng-model="selectedEmailTemplate" ng-options="emailTemplate.name for emailTemplate in listOfEmailTemplates"></select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-3 text-left" for="profile">Sending Profile:</label>
+										<div class="col-sm-9 whcf_modal-inputs">	
+											<select class="form-control" id="profile" ng-model="selectedSendingProfile" ng-options="sendingProfile.name for sendingProfile in listOfSendingProfiles"></select>
+										</div>
+									</div>			
+									<div class="form-group">
+										<label class="control-label col-sm-3 text-left" for="page">Landing Page:</label>
+										<div class="col-sm-9 whcf_modal-inputs">	
+											<select class="form-control" id="page" ng-model="selectedLandingPage" ng-options="landingPage.name for landingPage in listOfLandingPages"></select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-3 text-left" for="group">Group:</label>
+										<div class="col-sm-9 whcf_modal-inputs">	
+											<select class="form-control" id="group" ng-model="selectedGroup" ng-options="group.name for group in listOfGroups"></select>
+										</div>
+									</div>
+								</div>
+								<div class="modal-body" ng-if="operation == 'update'">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>First Name</th>
+												<th>Last Name</th>
+												<th>Email Address</th>
+												<th>Position</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat='campaignInfo in campaignsResultInfo'>
+												<td>{{campaignInfo.first_name}}</td>
+												<td>{{campaignInfo.last_name}}</td>
+												<td>{{campaignInfo.email}}</td>
+												<td>{{campaignInfo.position}}</td>
+												<td>{{campaignInfo.status}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="modal-footer">
+
+									<button type="submit" class="btn btn-default" ng-click="createCampaign()">Create</button>
+									<button type="submit" class="btn btn-primary" id="hidden-cancel" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!-- 	End		 -->
+
+
+			</div>
+		</div>
+	</body>
+</j:jelly>
+
+
+
+]]></html>
+        <name>test</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-02 08:50:59</sys_created_on>
+        <sys_id>92c6fc27db4133002d655fc74b9619d1</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>test</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_ui_page_92c6fc27db4133002d655fc74b9619d1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-02 08:57:35</sys_updated_on>
+    </sys_ui_page>
+</record_update>
